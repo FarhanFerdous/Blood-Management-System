@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Blood Management System{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="icon" href="https://img.icons8.com/emoji/48/red-square-emoji.png">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="app-body">
+<nav class="navbar navbar-expand-lg navbar-danger bg-danger navbar-dark shadow-sm sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/">🩸 BMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboards:demo_walkthrough' %}">Demo</a></li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'dashboards:donor_dashboard' %}">Dashboard</a></li>
+                    {% if user.is_staff %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'dashboards:admin_dashboard' %}">Admin</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-light text-danger ms-lg-2" href="{% url 'accounts:register' %}">Register</a></li>
+                {% endif %}
+                <li class="nav-item ms-lg-3">
+                    <button id="themeToggle" class="btn btn-outline-light btn-sm" type="button">Toggle theme</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <main class="container py-4">
+        {% for message in messages %}
+            <div class="alert alert-info shadow-sm">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="border-top py-4 mt-auto bg-body-tertiary">
+        <div class="container d-flex justify-content-between small text-muted">
+            <span>© {{ now|date:'Y' }} Blood Management System</span>
+            <span>Built with Django & Bootstrap</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const key = 'bms-theme';
+      const saved = localStorage.getItem(key);
+      if (saved) root.setAttribute('data-bs-theme', saved);
+      btn && btn.addEventListener('click', () => {
+        const current = root.getAttribute('data-bs-theme') || 'light';
+        const next = current === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-bs-theme', next);
+        localStorage.setItem(key, next);
+      });
+    </script>
+</body>
+</html>
+
+

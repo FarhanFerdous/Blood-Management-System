@@ -1,0 +1,22 @@
+:root {
+  --brand-danger: #dc3545;
+}
+
+.app-body { min-height: 100dvh; display: flex; flex-direction: column; }
+
+.hero { background: linear-gradient(180deg, rgba(220,53,69,.06), transparent 60%); border-radius: .75rem; }
+
+.stat-card .fs-3 { font-weight: 700; }
+
+.form-control { padding-top: .6rem; padding-bottom: .6rem; }
+
+/* Utility to add class to fields in templates via filter */
+.form-control.is-invalid { border-color: var(--bs-danger); }
+
+/* Tables */
+table thead th { white-space: nowrap; }
+
+/* Dark mode tweaks */
+[data-bs-theme="dark"] .hero { background: rgba(220,53,69,.1); }
+
+

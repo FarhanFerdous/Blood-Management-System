@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard | BMS{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Admin Overview</h2>
+  <a class="btn btn-danger" href="/admin/">Open Django Admin</a>
+ </div>
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card stat-card shadow-sm"><div class="card-body"><div class="text-body-secondary">Total Donors</div><div class="fs-3">{{ total_donors }}</div></div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card stat-card shadow-sm"><div class="card-body"><div class="text-body-secondary">Available Units</div><div class="fs-3">{{ total_units }}</div></div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card stat-card shadow-sm"><div class="card-body"><div class="text-body-secondary">Pending Requests</div><div class="fs-3">{{ pending_requests }}</div></div></div>
+  </div>
+ </div>
+
+<div class="card mt-4 shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Recent Requests</h5>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead><tr><th>Requester</th><th>Group</th><th>Units</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr><td colspan="5" class="text-body-secondary">No requests yet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

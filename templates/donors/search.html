@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Find Donors | BMS{% endblock %}
+{% block content %}
+<h3 class="mb-3">Find Donors</h3>
+<form method="get" class="row g-2 mb-3">
+  <div class="col-md-3">
+    <select name="blood_group" class="form-select">
+      <option value="">Any Blood Group</option>
+      {% for bg in 'A+ A- B+ B- AB+ AB- O+ O-'.split %}
+        <option value="{{ bg }}" {% if blood_group == bg %}selected{% endif %}>{{ bg }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <input type="text" name="city" class="form-control" placeholder="City" value="{{ city }}" />
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-danger w-100">Search</button>
+  </div>
+  <div class="col-md-3 text-md-end">
+    <a href="{% url 'donors:search' %}" class="btn btn-outline-secondary">Reset</a>
+  </div>
+</form>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead><tr><th>Username</th><th>Blood Group</th><th>City</th><th>Phone</th></tr></thead>
+        <tbody>
+          {% for d in donors %}
+          <tr>
+            <td>{{ d.user.username }}</td>
+            <td><span class="badge text-bg-danger">{{ d.blood_group }}</span></td>
+            <td>{{ d.city }}</td>
+            <td>{{ d.phone }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="4" class="text-body-secondary">No donors found.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <nav>
+      <ul class="pagination mb-0">
+        {% if donors.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ donors.previous_page_number }}&blood_group={{ blood_group }}&city={{ city }}">Previous</a></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link">Page {{ donors.number }} of {{ donors.paginator.num_pages }}</span></li>
+        {% if donors.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ donors.next_page_number }}&blood_group={{ blood_group }}&city={{ city }}">Next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+ </div>
+{% endblock %}
+
+

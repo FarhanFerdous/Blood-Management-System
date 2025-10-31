@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}New Blood Request | BMS{% endblock %}
+{% block content %}
+<h3 class="mb-3">New Blood Request</h3>
+<form method="post" class="row g-3">
+  {% csrf_token %}
+  <div class="col-md-3">
+    <label class="form-label">Blood Group</label>
+    <select name="blood_group" class="form-select">
+      {% for bg in blood_groups %}
+        <option value="{{ bg }}">{{ bg }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2">
+    <label class="form-label">Units</label>
+    <input type="number" name="units" class="form-control" value="1" min="1" max="5" />
+  </div>
+  <div class="col-12">
+    <label class="form-label">Reason (optional)</label>
+    <input type="text" name="reason" class="form-control" placeholder="Reason" />
+  </div>
+  <div class="col-12">
+    <button class="btn btn-danger">Submit Request</button>
+  </div>
+</form>
+{% endblock %}
+
+

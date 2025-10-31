@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile | BMS{% endblock %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Donor Profile</h5>
+        <form method="post" enctype="multipart/form-data" class="vstack gap-3">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-danger">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="text-body-secondary">Profile Photo</h6>
+        {% if profile.photo %}
+          <img src="{{ profile.photo.url }}" class="img-fluid rounded" alt="Profile"/>
+        {% else %}
+          <div class="text-body-secondary small">No photo uploaded</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

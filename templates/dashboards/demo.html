@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Demo Walkthrough | BMS{% endblock %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-12">
+    <h2 class="mb-3">Demo Walkthrough</h2>
+    <p class="text-body-secondary">Use these demo accounts to explore all features.</p>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="card-title">Admin Features</h5>
+        <div class="small text-body-secondary">Login as admin</div>
+        <div class="border rounded p-2 my-2 bg-body-tertiary small">
+          <div><strong>Username:</strong> admin</div>
+          <div><strong>Password:</strong> Admin@123</div>
+        </div>
+        <ul class="mb-3">
+          <li>Manage blood banks and inventory</li>
+          <li>View and approve/reject blood requests</li>
+          <li>View donors and donation records</li>
+        </ul>
+        <a class="btn btn-danger" href="/admin/">Open Django Admin</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="card-title">Donor Features</h5>
+        <div class="small text-body-secondary">Login as a donor</div>
+        <div class="border rounded p-2 my-2 bg-body-tertiary small">
+          <div><strong>Username:</strong> donor1</div>
+          <div><strong>Password:</strong> Donor1@123</div>
+        </div>
+        <ul class="mb-3">
+          <li>See donor dashboard and donation history</li>
+          <li>Make a blood request</li>
+          <li>Update profile and availability</li>
+        </ul>
+        <a class="btn btn-outline-danger" href="{% url 'accounts:login' %}">Go to Login</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">API Endpoints (DRF)</h5>
+        <p class="text-body-secondary">These endpoints require login (Session auth). Use admin or donor credentials and browse in your browser.</p>
+        <div class="row row-cols-1 row-cols-md-2 g-2">
+          <div class="col"><a href="/api/donors/profiles/" class="btn btn-sm btn-outline-secondary w-100">/api/donors/profiles/</a></div>
+          <div class="col"><a href="/api/banks/banks/" class="btn btn-sm btn-outline-secondary w-100">/api/banks/banks/</a></div>
+          <div class="col"><a href="/api/banks/inventory/" class="btn btn-sm btn-outline-secondary w-100">/api/banks/inventory/</a></div>
+          <div class="col"><a href="/api/donations/donations/" class="btn btn-sm btn-outline-secondary w-100">/api/donations/donations/</a></div>
+          <div class="col"><a href="/api/donations/requests/" class="btn btn-sm btn-outline-secondary w-100">/api/donations/requests/</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">One‑Click Demo Actions</h5>
+        <p class="text-body-secondary">Use these to quickly simulate common flows.</p>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-outline-danger" href="{% url 'dashboards:demo_create_request' %}">Create Request (donor1)</a>
+          <a class="btn btn-outline-success" href="{% url 'dashboards:demo_approve_request' %}">Approve Oldest Request</a>
+          <a class="btn btn-outline-primary" href="{% url 'dashboards:demo_create_donation' %}">Create Donation (+1)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+
